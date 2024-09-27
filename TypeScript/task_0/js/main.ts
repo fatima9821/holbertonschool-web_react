@@ -1,3 +1,4 @@
+// Define the Student interface
 interface Student {
     firstName: string;
     lastName: string;
@@ -5,56 +6,42 @@ interface Student {
     location: string;
 }
 
-// Création de deux étudiants
+// Create two students
 const student1: Student = {
     firstName: 'John',
     lastName: 'Doe',
     age: 20,
-    location: 'New York'
+    location: 'New York',
 };
 
 const student2: Student = {
     firstName: 'Jane',
     lastName: 'Smith',
     age: 22,
-    location: 'Los Angeles'
+    location: 'Los Angeles',
 };
 
-// Tableau des étudiants
+// Add the students to an array
 const studentsList: Student[] = [student1, student2];
 
-// Fonction pour créer et afficher le tableau
-function renderTable() {
-    // Création de l'élément table
-    const table = document.createElement('table');
-    const tableBody = document.createElement('tbody');
+// Create the table and append to the DOM
+const body = document.querySelector('body');
+const table = document.createElement('table');
+const tableBody = document.createElement('tbody');
 
-    // Pour chaque étudiant, ajouter une ligne dans la table
-    studentsList.forEach((student) => {
-        const row = document.createElement('tr');
+// Iterate over the students and add rows to the table
+studentsList.forEach((student) => {
+    const row = document.createElement('tr');
+    const firstNameCell = document.createElement('td');
+    const locationCell = document.createElement('td');
 
-        // Créer les cellules pour le prénom et la localisation
-        const firstNameCell = document.createElement('td');
-        firstNameCell.textContent = student.firstName;
+    firstNameCell.textContent = student.firstName;
+    locationCell.textContent = student.location;
 
-        const locationCell = document.createElement('td');
-        locationCell.textContent = student.location;
+    row.appendChild(firstNameCell);
+    row.appendChild(locationCell);
+    tableBody.appendChild(row);
+});
 
-        // Ajouter les cellules à la ligne
-        row.appendChild(firstNameCell);
-        row.appendChild(locationCell);
-
-        // Ajouter la ligne au corps de la table
-        tableBody.appendChild(row);
-    });
-
-    // Ajouter le corps de la table à la table
-    table.appendChild(tableBody);
-
-    // Ajouter la table au document HTML (par exemple dans un élément avec l'id 'table-container')
-    document.body.appendChild(table);
-}
-
-// Appeler la fonction pour afficher la table
-renderTable();
-
+table.appendChild(tableBody);
+body.appendChild(table);
